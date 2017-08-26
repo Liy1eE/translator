@@ -1,11 +1,15 @@
 # translator
 
 ## 介绍
-翻译英文
+一款英翻中的浏览器插件
+
+## 特点
 - 轻量
 - 极速
 - 百度翻译API
 - 按住Ctrl可以取词
+
+## 演示
 ![translator](https://raw.githubusercontent.com/Liy1eE/translator/master/imgs/test.gif)
 
 ## 安装
