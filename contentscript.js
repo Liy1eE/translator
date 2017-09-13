@@ -126,10 +126,7 @@ function display(data, time) {
 	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
 	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>")
 	html.push('</div>');
-
-	//var point = data.data.length > 1 ? "●" : "";
 	html.push('<div class="trans_content">', data.translate.dit, '</div>');
-
 	html.push('<div style="padding-bottom:2px"></div>');
 	div.innerHTML = html.join('');
 	div.style.display = "block";
