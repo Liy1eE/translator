@@ -97,7 +97,6 @@ function checkAvailable() {
 		return false;
 
 	lastSelectTxt = selectTxt;
-	selectTxt = selectTxt.replace(new RegExp("([A-Z][a-z]+)", 'g'), " $1 ").trim();
 
 	return true;
 }
