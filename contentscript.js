@@ -122,33 +122,17 @@ function createDiv() {
 }
 
 function display(data, time) {
-	if (data.type > 0) {
-		var html = ['<div class="trans_title">']
-		html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
-		html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>")
-		html.push('</div>');
+	var html = ['<div class="trans_title">']
+	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
+	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>")
+	html.push('</div>');
 
-		if (data.type == 2) {
-			var point = data.data.length > 1 ? "●" : "";
-			for (var i = 0; i < data.data.length; i++)
-				html.push('<div class="trans_content">', point + data.data[i].dst, '</div>');
-		} else if (data.type == 1) {
-			var result = JSON.parse(data.result);
-			for (var i = 0; i < result.content[0].mean.length; i++) {
-				var temp = "";
-				if (result.content[0].mean[i].pre)
-					temp = result.content[0].mean[i].pre + " ";
-				for (var k in result.content[0].mean[i].cont) {
-					temp = temp + k + ";";
-				}
-				html.push('<div class="trans_content">', temp, '</div>');
-			}
-		}
+	//var point = data.data.length > 1 ? "●" : "";
+	html.push('<div class="trans_content">', data.translate.dit, '</div>');
 
-		html.push('<div style="padding-bottom:2px"></div>');
-		div.innerHTML = html.join('');
-		div.style.display = "block";
-	}
+	html.push('<div style="padding-bottom:2px"></div>');
+	div.innerHTML = html.join('');
+	div.style.display = "block";
 }
 
 createDiv();
