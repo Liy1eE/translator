@@ -125,9 +125,10 @@ function display(data, time) {
 	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
 	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>")
 	html.push('</div>');
-	html.push('<div class="trans_content">', data.translate.dit, '</div>');
+	html.push('<div class="trans_content"></div>');
 	html.push('<div style="padding-bottom:2px"></div>');
 	div.innerHTML = html.join('');
+	div.childNodes[1].innerText = data.translate.dit
 	div.style.display = "block";
 }
 
