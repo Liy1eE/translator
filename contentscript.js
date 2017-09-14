@@ -109,7 +109,7 @@ function query(value) {
 	}, function (json) {
 		if (json) {
 			var data = eval("(" + json + ")");
-			if (data.translate.orig_text.substr(0,3) != selectTxt.substr(0,3))
+			if (data.translate.text.substr(0,3) != selectTxt.substr(0,3))
 				return;
 			var time = ((performance.now() - start) / 1000).toFixed(3);
 			display(data, time);
