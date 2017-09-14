@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 			if (xhr.readyState == 4 && xhr.status == 200)
 				sendResponse(xhr.responseText);
 		}
-		xhr.send("from=auto&to=zh-CHS&text=" + message.value);
+		xhr.send("from=auto&to=zh-CHS&oxford=on&text=" + message.value);
 		return true;
 	}
 });

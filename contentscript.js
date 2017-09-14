@@ -109,7 +109,7 @@ function query(value) {
 	}, function (json) {
 		if (json) {
 			var data = eval("(" + json + ")");
-			if (data.translate.orig_text.substr(0,3) != selectTxt.substr(0,3))
+			if (data.translate.orig_text.substr(0, 3) != selectTxt.substr(0, 3))
 				return;
 			var time = ((performance.now() - start) / 1000).toFixed(3);
 			display(data, time);
@@ -124,27 +124,32 @@ function createDiv() {
 }
 
 function display(data, time) {
-	var html = ['<div class="trans_title">']
+	var isDic = data.dictionary != null;
+	var html = ['<div class="trans_title">'];
 	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
 	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>");
 	html.push('</div>');
-	html.push('<div class="trans_content"></div>');
-	
-	if(data.dictionary != null){
+
+	if (isDic) {
 		var temp = "";
-		var groups = data.dictionary.value[0].meaningGroups;
-		for(var i = 0; i< groups.length;i++){
-			var meanings = groups[i].meanings[0].richDefinitions[0].fragments;
-			for(j = 0;j< meanings.length;j++){
-				temp = temp + meanings[j].text + ";";
+		var content = data.dictionary.content;
+		for (var i = 0; i < content.length; i++) {
+			var usual = content[i].usual;
+			for (j = 0; j < usual.length; j++) {
+				var meaning = usual[j];
+				html.push('<div class="trans_content">', meaning.pos, meaning.values[0], '</div>');
 			}
-			html.push('<div class="trans_content">', temp, '</div>');
 		}
+	} else {
+		html.push('<div class="trans_content"></div>');
 	}
-	
+
 	html.push('<div style="padding-bottom:2px"></div>');
 	div.innerHTML = html.join('');
-	div.childNodes[1].innerText = data.translate.dit;
+
+	if (!isDic)
+		div.childNodes[1].innerText = data.translate.dit;
+
 	div.style.display = "block";
 }
 
