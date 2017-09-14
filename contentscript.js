@@ -129,6 +129,19 @@ function display(data, time) {
 	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>");
 	html.push('</div>');
 	html.push('<div class="trans_content"></div>');
+	
+	if(data.dictionary != null){
+		var temp = "";
+		var groups = data.dictionary.value[0].meaningGroups;
+		for(var i = 0; i< groups.length;i++){
+			var meanings = groups[i].meanings[0].richDefinitions[0].fragments;
+			for(j = 0;j< meanings.length;j++){
+				temp = temp + meanings[j].text + ";";
+			}
+			html.push('<div class="trans_content">', temp, '</div>');
+		}
+	}
+	
 	html.push('<div style="padding-bottom:2px"></div>');
 	div.innerHTML = html.join('');
 	div.childNodes[1].innerText = data.translate.dit;
