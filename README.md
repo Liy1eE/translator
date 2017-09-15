@@ -10,10 +10,6 @@
 - 划词翻译
 - 双击全选翻译
 - 长文分段显示
-- 按住Ctrl可以取词
-
-## 演示
-![translator](/imgs/test.gif)
 
 ## 安装
 - [直接下载](https://github.com/Liy1eE/translator/releases)
