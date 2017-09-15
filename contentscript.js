@@ -75,7 +75,7 @@ function createDiv() {
 function display(data, time) {
 	var isDic = data.dictionary != null;
 	var html = ['<div class="trans_title">'];
-	
+
 	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
 	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>");
 	html.push('</div>');
@@ -86,7 +86,7 @@ function display(data, time) {
 			var usual = content[i].usual;
 			for (j = 0; j < usual.length; j++) {
 				var meaning = usual[j];
-				html.push('<div class="trans_content">', meaning.pos, meaning.values[0], '</div>');
+				html.push('<div class="trans_content"><b>', meaning.pos, '</b>', meaning.values[0], '</div>');
 			}
 		}
 	} else {
