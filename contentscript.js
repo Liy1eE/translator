@@ -75,12 +75,12 @@ function createDiv() {
 function display(data, time) {
 	var isDic = data.dictionary != null;
 	var html = ['<div class="trans_title">'];
+	
 	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
 	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>");
 	html.push('</div>');
 
 	if (isDic) {
-		var temp = "";
 		var content = data.dictionary.content;
 		for (var i = 0; i < content.length; i++) {
 			var usual = content[i].usual;
