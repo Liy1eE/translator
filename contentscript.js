@@ -2,23 +2,6 @@ var div = null;
 var selectTxt = null;
 var lastSelectTxt = null;
 
-document.onmousemove = function (event) {
-	if (!event.ctrlKey)
-		return;
-
-	var word = getWordAtPoint(event.target, event.x, event.y);
-
-	if (word)
-		selectTxt = word.trim();
-
-	if (!checkAvailable())
-		return;
-
-	div.style.left = event.x - 30 + "px";
-	div.style.top = document.body.scrollTop + event.y + 20 + "px";
-	query(selectTxt);
-}
-
 document.addEventListener('copy', function () {
 	div.style.display = "none";
 }, true);
@@ -51,40 +34,6 @@ document.onmouseup = function (event) {
 
 	query(selectTxt);
 };
-
-function getWordAtPoint(elem, x, y) {
-	if (elem.nodeType == elem.TEXT_NODE) {
-		var range = elem.ownerDocument.createRange();
-		range.selectNodeContents(elem);
-		var currentPos = 0;
-		var endPos = range.endOffset;
-		while (currentPos + 1 < endPos) {
-			range.setStart(elem, currentPos);
-			range.setEnd(elem, currentPos + 1);
-			if (range.getBoundingClientRect().left <= x && range.getBoundingClientRect().right >= x &&
-				range.getBoundingClientRect().top <= y && range.getBoundingClientRect().bottom >= y) {
-				range.expand("word");
-				var ret = range.toString();
-				range.detach();
-				return (ret);
-			}
-			currentPos += 1;
-		}
-	} else {
-		for (var i = 0; i < elem.childNodes.length; i++) {
-			var range = elem.childNodes[i].ownerDocument.createRange();
-			range.selectNodeContents(elem.childNodes[i]);
-			if (range.getBoundingClientRect().left <= x && range.getBoundingClientRect().right >= x &&
-				range.getBoundingClientRect().top <= y && range.getBoundingClientRect().bottom >= y) {
-				range.detach();
-				return (getWordAtPoint(elem.childNodes[i], x, y));
-			} else {
-				range.detach();
-			}
-		}
-	}
-	return (null);
-}
 
 function checkAvailable() {
 	if (selectTxt == "" || !/[a-zA-Z]/.test(selectTxt) || lastSelectTxt == selectTxt)
