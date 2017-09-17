@@ -36,7 +36,11 @@ document.onmouseup = function (event) {
 };
 
 function checkAvailable() {
-	if (selectTxt == "" || !/[a-zA-Z]/.test(selectTxt) || lastSelectTxt == selectTxt)
+	if (selectTxt == "" || lastSelectTxt == selectTxt)
+		return false;
+	
+	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+	if(reg.test(selectTxt))
 		return false;
 
 	var ele = event.toElement || event.relatedTarget;
@@ -76,8 +80,12 @@ function display(data, time) {
 	var isDic = data.dictionary != null;
 	var html = ['<div class="trans_title">'];
 
-	html.push('<strong>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</strong>");
-	html.push('<span style="float:right;color:#0F74BD">(', time, " seconds)</span>");
+	html.push('<b>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</b>");
+	
+	var original = data.detect.language
+	original = original.substr(0, original.length - 1)
+	
+	html.push('<span style="float:right;color:#0F74BD">(', original, '→中)(', time, " seconds)</span>");
 	html.push('</div>');
 
 	if (isDic) {
