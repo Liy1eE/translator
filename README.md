@@ -6,7 +6,7 @@
 ## 特点
 - 轻量
 - 极速
-- 搜狗翻译API
+- [搜狗翻译](https://www.jiqizhixin.com/articles/2017-08-12-2)API
 - 自动识别语言
 - 划词翻译
 - 双击全选翻译
