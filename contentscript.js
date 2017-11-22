@@ -59,12 +59,9 @@ function query(value) {
     chrome.runtime.sendMessage({
         "method": "translate",
         "value": value
-    }, function (json) {
-        if (json) {
-            var data = eval("(" + json + ")");
-            var time = ((performance.now() - start) / 1000).toFixed(3);
-            display(data, time);
-        }
+    }, function (value) {
+        var time = ((performance.now() - start) / 1000).toFixed(3);
+        display(value, time);
     });
 }
 
@@ -74,21 +71,26 @@ function createDiv() {
     document.body.appendChild(div);
 }
 
-function display(data, time) {
+function display(value, time) {
+    var data = value.data;
+    var cocaIdx = value.cocaIdx;
+
     var html = ['<div class="trans_title">'];
     html.push('<b>', selectTxt.substr(0, 8), selectTxt.length > 8 ? '...' : '', '</b>');
 
+    var content = data[0];
+    var dictionary = data[1];
     var sourceLanguage = data[2];
-    html.push('<span style="float:right;color:#0F74BD">(', sourceLanguage, ')(', time, ' seconds)</span>');
+
+    var cocaStr = '';
+    if (cocaIdx) {
+        cocaStr = '(' + cocaIdx + ')';
+    }
+
+    html.push('<span style="float:right;color:#0F74BD">', cocaStr, '(', sourceLanguage, ')(', time, ' seconds)</span>');
     html.push('</div>');
 
-    var dictionary = data[1];
-    if (dictionary == null) {
-        var content = data[0];
-        for (var i = 0; i < content.length; i++)
-            html.push('<div class="trans_content">', content[i][0], '</div>');
-    }
-    else {
+    if (dictionary) {
         for (var i = 0; i < dictionary.length; i++) {
             var translation = dictionary[i];
             var str = '<i><b>' + translation[0] + '&nbsp;</b></i>';
@@ -98,6 +100,9 @@ function display(data, time) {
             }
             html.push('<div class="trans_content">', str, '</div>');
         }
+    } else {
+        for (var i = 0; i < content.length; i++)
+            html.push('<div class="trans_content">', content[i][0], '</div>');
     }
 
     html.push('<div style="padding-bottom:2px"></div>');
