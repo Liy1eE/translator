@@ -7,7 +7,7 @@
 - 轻量
 - 极速
 - COCA 词频排名(2万内)
-- [谷歌翻译 API](translate.google.cn)
+- [谷歌翻译 API](https://translate.google.cn)
 - 自动识别语言
 - 划词翻译
 - 双击全选翻译
