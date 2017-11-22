@@ -26,6 +26,9 @@ document.onmouseup = function (event) {
     var rect = selection.getRangeAt(0).getBoundingClientRect();
     var left = rect.left;
 
+    if (left == 0)
+        return
+    
     if (left < 0)
         left = 0
 
@@ -90,8 +93,9 @@ function display(data, time) {
         for (var i = 0; i < dictionary.length; i++) {
             var translation = dictionary[i];
             var str = '<i><b>' + translation[0] + '&nbsp;</b></i>';
-            for (var j = 0; j < translation[1].length && j < 3; j++) {
-                str += translation[1][j] + ',';
+            var length = Math.min(translation[1].length, 3)
+            for (var j = 0; j < length; j++) {
+                str += translation[1][j] + (j == length - 1 ? ';' : ',');
             }
             html.push('<div class="trans_content">', str, '</div>');
         }
