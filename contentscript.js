@@ -75,19 +75,21 @@ function display(value, time) {
     var data = value.data;
     var cocaIdx = value.cocaIdx;
 
+    var title = null;
+    if (cocaIdx)
+        title = selectTxt + '[' + cocaIdx + ']';
+    else
+        title = selectTxt.substr(0, 8) + (selectTxt.length > 8 ? '...' : '');
+
     var html = ['<div class="trans_title">'];
-    html.push('<b>', selectTxt.substr(0, 8), selectTxt.length > 8 ? '...' : '', '</b>');
+    html.push('<b>', title, '</b>');
 
     var content = data[0];
     var dictionary = data[1];
     var sourceLanguage = data[2];
 
-    var cocaStr = '';
-    if (cocaIdx) {
-        cocaStr = '(' + cocaIdx + ')';
-    }
 
-    html.push('<span style="float:right;color:#0F74BD">', cocaStr, '(', sourceLanguage, ')(', time, ' seconds)</span>');
+    html.push('<span style="float:right;color:#0F74BD">(', sourceLanguage, ')(', time, ' seconds)</span>');
     html.push('</div>');
 
     if (dictionary) {
