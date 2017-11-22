@@ -26,9 +26,10 @@ document.onmouseup = function (event) {
     var rect = selection.getRangeAt(0).getBoundingClientRect();
     var left = rect.left;
 
+    // search bar pos
     if (left == 0)
         return
-    
+
     if (left < 0)
         left = 0
 
@@ -61,8 +62,6 @@ function query(value) {
     }, function (json) {
         if (json) {
             var data = eval("(" + json + ")");
-            // if (data.translate.text.substr(0, 3) != selectTxt.substr(0, 3))
-            //     return;
             var time = ((performance.now() - start) / 1000).toFixed(3);
             display(data, time);
         }
@@ -77,10 +76,10 @@ function createDiv() {
 
 function display(data, time) {
     var html = ['<div class="trans_title">'];
-    html.push('<b>', selectTxt.substr(0, 5), selectTxt.length > 5 ? '...' : '', '</b>');
+    html.push('<b>', selectTxt.substr(0, 8), selectTxt.length > 8 ? '...' : '', '</b>');
 
     var sourceLanguage = data[2];
-    html.push('<span style="float:right;color:#0F74BD">(', sourceLanguage, '→中)(', time, ' seconds)</span>');
+    html.push('<span style="float:right;color:#0F74BD">(', sourceLanguage, ')(', time, ' seconds)</span>');
     html.push('</div>');
 
     var dictionary = data[1];
@@ -104,7 +103,7 @@ function display(data, time) {
     html.push('<div style="padding-bottom:2px"></div>');
 
     div.innerHTML = html.join('');
-    div.style.display = "block";
+    div.style.display = 'block';
 }
 
 createDiv();
