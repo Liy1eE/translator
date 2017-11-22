@@ -6,14 +6,15 @@
 ## 特点
 - 轻量
 - 极速
-- [搜狗翻译](https://www.jiqizhixin.com/articles/2017-08-12-2)API
+- COCA 词频排名(2万内)
+- [谷歌翻译 API](translate.google.cn)
 - 自动识别语言
 - 划词翻译
 - 双击全选翻译
 - 长文分段显示
 
 ## 演示
-![translator](/imgs/test.png)
+![translator](/imgs/demo.png)
 
 ## 安装
 - [直接下载](https://github.com/Liy1eE/translator/releases)
