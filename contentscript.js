@@ -2,7 +2,7 @@ var div = null;
 var selectTxt = null;
 var lastSelectTxt = null;
 
-document.addEventListener('copy', function () {
+document.addEventListener("copy", function () {
     div.style.display = "none";
 }, true);
 
@@ -25,7 +25,7 @@ document.onmouseup = function (event) {
 
     var rect = selection.getRangeAt(0).getBoundingClientRect();
     var left = rect.left;
-    
+
     if (left < 0)
         left = 0
 
@@ -37,10 +37,6 @@ document.onmouseup = function (event) {
 
 function checkAvailable() {
     if (selectTxt == "" || lastSelectTxt == selectTxt)
-        return false;
-
-    var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-    if (reg.test(selectTxt))
         return false;
 
     var ele = event.toElement || event.relatedTarget;
@@ -62,8 +58,8 @@ function query(value) {
     }, function (json) {
         if (json) {
             var data = eval("(" + json + ")");
-            if (data.translate.text.substr(0, 3) != selectTxt.substr(0, 3))
-                return;
+            // if (data.translate.text.substr(0, 3) != selectTxt.substr(0, 3))
+            //     return;
             var time = ((performance.now() - start) / 1000).toFixed(3);
             display(data, time);
         }
@@ -77,36 +73,33 @@ function createDiv() {
 }
 
 function display(data, time) {
-    var isDic = data.dictionary != null;
     var html = ['<div class="trans_title">'];
+    html.push('<b>', selectTxt.substr(0, 5), selectTxt.length > 5 ? '...' : '', '</b>');
 
-    html.push('<b>', selectTxt.substr(0, 18), selectTxt.length > 18 ? "..." : "", "</b>");
-
-    var original = data.detect.language
-    original = original.substr(0, original.length - 1)
-
-    html.push('<span style="float:right;color:#0F74BD">(', original, '→中)(', time, " seconds)</span>");
+    var sourceLanguage = data[2];
+    html.push('<span style="float:right;color:#0F74BD">(', sourceLanguage, '→中)(', time, ' seconds)</span>');
     html.push('</div>');
 
-    if (isDic) {
-        var content = data.dictionary.content;
-        for (var i = 0; i < content.length; i++) {
-            var usual = content[i].usual;
-            for (j = 0; j < usual.length; j++) {
-                var meaning = usual[j];
-                html.push('<div class="trans_content"><b>', meaning.pos, '</b>', meaning.values[0], '</div>');
+    var dictionary = data[1];
+    if (dictionary == null) {
+        var content = data[0];
+        for (var i = 0; i < content.length; i++)
+            html.push('<div class="trans_content">', content[i][0], '</div>');
+    }
+    else {
+        for (var i = 0; i < dictionary.length; i++) {
+            var translation = dictionary[i];
+            var str = '<i><b>' + translation[0] + '&nbsp;</b></i>';
+            for (var j = 0; j < translation[1].length && j < 3; j++) {
+                str += translation[1][j] + ',';
             }
+            html.push('<div class="trans_content">', str, '</div>');
         }
-    } else {
-        html.push('<div class="trans_content"></div>');
     }
 
     html.push('<div style="padding-bottom:2px"></div>');
+
     div.innerHTML = html.join('');
-
-    if (!isDic)
-        div.childNodes[1].innerText = data.translate.dit;
-
     div.style.display = "block";
 }
 

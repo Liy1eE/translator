@@ -1,35 +1,35 @@
 {
-    "manifest_version": 2,
-    "name": "光速翻译",
-    "description": "轻量，快速",
-    "version": "3.4.2",
-    "icons": {
-        "512": "icons/icon.png"
-    },
-    "permissions": [
-        "*://*/*"
+  "manifest_version": 2,
+  "name": "光速翻译",
+  "description": "轻量，快速",
+  "version": "3.5.0",
+  "icons": {
+    "512": "icons/icon.png"
+  },
+  "permissions": [
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
     ],
-    "browser_action": {
-        "default_icon": "icons/icon.png"
-    },
-    "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": false
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*/*"
-            ],
-            "js": [
-                "contentscript.js"
-            ],
-            "css": [
-                "popup.css"
-            ],
-            "all_frames": true
-        }
-    ]
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "css": [
+        "popup.css"
+      ],
+      "all_frames": true
+    }
+  ]
 }
