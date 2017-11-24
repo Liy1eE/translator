@@ -6,8 +6,8 @@
 ## 特点
 - 轻量
 - 极速
-- 单词美国当代语料库(COCA) 20000 高频排名显示
-- [谷歌翻译 API](https://translate.google.cn)
+- 单词[美国当代语料库(COCA)](https://www.wordfrequency.info/) 20000 高频排名显示
+- [谷歌翻译 ](https://translate.google.cn) API
 - 自动识别语言
 - 划词翻译
 - 双击全选翻译
