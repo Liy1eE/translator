@@ -40,7 +40,7 @@ document.onmouseup = function (event) {
 };
 
 function checkAvailable() {
-    if (selectTxt == "" || lastSelectTxt == selectTxt)
+    if (selectTxt == "" || lastSelectTxt == selectTxt || /[\u4e00-\u9fa5]/g.test(selectTxt))
         return false;
 
     var ele = event.toElement || event.relatedTarget;
