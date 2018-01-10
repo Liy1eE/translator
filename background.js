@@ -1,17 +1,17 @@
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.method = "translate") {
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open("POST", "https://translate.google.cn/translate_a/single", true);
         xhr.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var content = data[0];
-                var dictionary = data[1];
-                var sourceLanguage = data[2];
-                var cocaIdx = null;
+                let data = JSON.parse(xhr.responseText);
+                let content = data[0];
+                let dictionary = data[1];
+                let sourceLanguage = data[2];
+                let cocaIdx = null;
                 if (sourceLanguage === "en" && dictionary) {
-                    var word = content[0][1].toLowerCase();
+                    let word = content[0][1].toLowerCase();
                     cocaIdx = window.getIndex(word)
                 }
                 sendResponse({"data": data, "cocaIdx": cocaIdx});

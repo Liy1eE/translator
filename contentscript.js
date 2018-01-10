@@ -1,21 +1,21 @@
-var div = null;
-var selectTxt = null;
-var lastSelectTxt = null;
+let div = null;
+let selectTxt = null;
+let lastSelectTxt = null;
 
 document.addEventListener("copy", function () {
     div.style.display = "none";
 }, true);
 
 document.onmousedown = function (event) {
-    var ele = event.toElement || event.relatedTarget;
-    var result = div.compareDocumentPosition(ele);
+    let ele = event.toElement || event.relatedTarget;
+    let result = div.compareDocumentPosition(ele);
 
     if (result !== 20)
         div.style.display = "none";
 };
 
 document.onmouseup = function () {
-    var selection = window.getSelection();
+    let selection = window.getSelection();
     selectTxt = selection.toString().trim();
 
     if (!checkAvailable()) {
@@ -23,8 +23,8 @@ document.onmouseup = function () {
         return;
     }
 
-    var rect = selection.getRangeAt(0).getBoundingClientRect();
-    var left = rect.left;
+    let rect = selection.getRangeAt(0).getBoundingClientRect();
+    let left = rect.left;
 
     // search bar pos
     if (left === 0)
@@ -43,8 +43,8 @@ function checkAvailable() {
     if (selectTxt === "" || lastSelectTxt === selectTxt || /[\u4e00-\u9fa5]/g.test(selectTxt))
         return false;
 
-    var ele = event.toElement || event.relatedTarget;
-    var result = div.compareDocumentPosition(ele);
+    let ele = event.toElement || event.relatedTarget;
+    let result = div.compareDocumentPosition(ele);
 
     if (result === 20)
         return false;
@@ -55,12 +55,12 @@ function checkAvailable() {
 }
 
 function query(value) {
-    var start = performance.now();
+    let start = performance.now();
     chrome.runtime.sendMessage({
         "method": "translate",
         "value": value
     }, function (value) {
-        var time = ((performance.now() - start) / 1000).toFixed(3);
+        let time = ((performance.now() - start) / 1000).toFixed(3);
         display(value, time);
     });
 }
@@ -72,44 +72,42 @@ function createDiv() {
 }
 
 function display(value, time) {
-    var data = value.data;
-    var cocaIdx = value.cocaIdx;
+    let data = value.data;
+    let cocaIdx = value.cocaIdx;
 
-    var title = null;
+    let title = null;
     if (cocaIdx)
-        title = selectTxt + '[' + cocaIdx + ']';
+        title = `${selectTxt}[${cocaIdx}]`;
     else
-        title = selectTxt.substr(0, 8) + (selectTxt.length > 8 ? '...' : '');
+        title = `${selectTxt.substr(0, 8)}${selectTxt.length > 8 ? '...' : ''}`;
 
-    var html = ['<div class="trans_title">'];
-    html.push('<b>', title, '</b>');
-
-    var content = data[0];
-    var dictionary = data[1];
-    var sourceLanguage = data[2];
-
-
-    html.push('<span style="float:right;color:#0F74BD">(', sourceLanguage, ')(', time, ' seconds)</span>');
-    html.push('</div>');
-
+    let content = data[0];
+    let dictionary = data[1];
+    let sourceLanguage = data[2];
+    let dict_txt = "";
     if (dictionary) {
-        for (var i = 0; i < dictionary.length; i++) {
-            var translation = dictionary[i];
-            var str = '<i><b>' + translation[0] + '&nbsp;</b></i>';
-            var length = Math.min(translation[1].length, 3)
-            for (var j = 0; j < length; j++) {
+        for (let i = 0; i < dictionary.length; i++) {
+            let translation = dictionary[i];
+            let str = `<i><b>${translation[0]}&nbsp;</b></i>`;
+            let length = Math.min(translation[1].length, 3)
+            for (let j = 0; j < length; j++) {
                 str += translation[1][j] + (j === length - 1 ? ';' : ',');
             }
-            html.push('<div class="trans_content">', str, '</div>');
+            dict_txt += `<div class="trans_content">${str}</div>`;
         }
     } else {
-        for (var i = 0; i < content.length; i++)
-            html.push('<div class="trans_content">', content[i][0], '</div>');
+        for (let i = 0; i < content.length; i++)
+            dict_txt += `<div class="trans_content">${content[i][0]}</div>`;
     }
 
-    html.push('<div style="padding-bottom:2px"></div>');
-
-    div.innerHTML = html.join('');
+    div.innerHTML = `
+<div class="trans_title">
+<b>${title}</b>
+<span style="float:right;color:#0F74BD">(${sourceLanguage})(${time} seconds)</span>
+</div>
+${dict_txt}
+<div style="padding-bottom:2px"></div>
+`;
     div.style.display = 'block';
 }
 
