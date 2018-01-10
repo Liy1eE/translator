@@ -10,7 +10,7 @@ document.onmousedown = function (event) {
     var ele = event.toElement || event.relatedTarget;
     var result = div.compareDocumentPosition(ele);
 
-    if (result != 20)
+    if (result !== 20)
         div.style.display = "none";
 };
 
@@ -27,11 +27,11 @@ document.onmouseup = function (event) {
     var left = rect.left;
 
     // search bar pos
-    if (left == 0)
-        return
+    if (left === 0)
+        return;
 
     if (left < 0)
-        left = 0
+        left = 0;
 
     div.style.left = document.body.scrollLeft + document.documentElement.scrollLeft + left + "px";
     div.style.top = document.body.scrollTop + document.documentElement.scrollTop + rect.bottom + 5 + "px";
@@ -40,13 +40,13 @@ document.onmouseup = function (event) {
 };
 
 function checkAvailable() {
-    if (selectTxt == "" || lastSelectTxt == selectTxt || /[\u4e00-\u9fa5]/g.test(selectTxt))
+    if (selectTxt === "" || lastSelectTxt === selectTxt || /[\u4e00-\u9fa5]/g.test(selectTxt))
         return false;
 
     var ele = event.toElement || event.relatedTarget;
     var result = div.compareDocumentPosition(ele);
 
-    if (result == 20)
+    if (result === 20)
         return false;
 
     lastSelectTxt = selectTxt;
@@ -98,7 +98,7 @@ function display(value, time) {
             var str = '<i><b>' + translation[0] + '&nbsp;</b></i>';
             var length = Math.min(translation[1].length, 3)
             for (var j = 0; j < length; j++) {
-                str += translation[1][j] + (j == length - 1 ? ';' : ',');
+                str += translation[1][j] + (j === length - 1 ? ';' : ',');
             }
             html.push('<div class="trans_content">', str, '</div>');
         }
