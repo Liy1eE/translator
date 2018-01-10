@@ -102,8 +102,10 @@ function display(value, time) {
 
     div.innerHTML = `
 <div class="trans_title">
-<b>${title}</b>
-<span style="float:right;color:#0F74BD">(${sourceLanguage})(${time} seconds)</span>
+    <b>${title}</b>
+    <span style="float:right;color:#0F74BD">
+        (${sourceLanguage})(${time} seconds)
+    </span>
 </div>
 ${dict_txt}
 <div style="padding-bottom:2px"></div>
