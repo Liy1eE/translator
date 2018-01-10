@@ -14,7 +14,7 @@ document.onmousedown = function (event) {
         div.style.display = "none";
 };
 
-document.onmouseup = function (event) {
+document.onmouseup = function () {
     var selection = window.getSelection();
     selectTxt = selection.toString().trim();
 
