@@ -15,7 +15,7 @@
   "background": {
     "scripts": [
       "background.js",
-      "util.js",
+      "coca20000.js",
       "iso639_1.js"
     ],
     "persistent": false

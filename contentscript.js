@@ -74,7 +74,7 @@ function createDiv() {
 function display(value, time) {
     let data = value.data;
     let cocaIdx = value.cocaIdx;
-    let sourceLanguage = value.sourceLanguage
+    let sourceLanguage = value.sourceLanguage;
 
     let title = null;
     if (cocaIdx)
@@ -89,7 +89,7 @@ function display(value, time) {
         for (let i = 0; i < dictionary.length; i++) {
             let translation = dictionary[i];
             let str = `<i><b>${translation[0]}&nbsp;</b></i>`;
-            let length = Math.min(translation[1].length, 3)
+            let length = Math.min(translation[1].length, 3);
             for (let j = 0; j < length; j++) {
                 str += translation[1][j] + (j === length - 1 ? ";" : ",");
             }
