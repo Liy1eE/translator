@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "光速翻译",
+  "name": "Google 划词翻译",
   "description": "轻量，快速",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "icons": {
     "512": "icons/icon.png"
   },
@@ -15,7 +15,8 @@
   "background": {
     "scripts": [
       "background.js",
-      "util.js"
+      "util.js",
+      "iso639_1.js"
     ],
     "persistent": false
   },

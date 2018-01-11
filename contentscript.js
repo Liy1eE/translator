@@ -74,16 +74,16 @@ function createDiv() {
 function display(value, time) {
     let data = value.data;
     let cocaIdx = value.cocaIdx;
+    let sourceLanguage = value.sourceLanguage
 
     let title = null;
     if (cocaIdx)
         title = `${selectTxt}[${cocaIdx}]`;
     else
-        title = `${selectTxt.substr(0, 15)}${selectTxt.length > 15 ? '...' : ''}`;
+        title = `${selectTxt.substr(0, 15)}${selectTxt.length > 15 ? "..." : ""}`;
 
     let content = data[0];
     let dictionary = data[1];
-    let sourceLanguage = data[2];
     let dict_txt = "";
     if (dictionary) {
         for (let i = 0; i < dictionary.length; i++) {
@@ -91,7 +91,7 @@ function display(value, time) {
             let str = `<i><b>${translation[0]}&nbsp;</b></i>`;
             let length = Math.min(translation[1].length, 3)
             for (let j = 0; j < length; j++) {
-                str += translation[1][j] + (j === length - 1 ? ';' : ',');
+                str += translation[1][j] + (j === length - 1 ? ";" : ",");
             }
             dict_txt += `<div class="trans_content">${str}</div>`;
         }
@@ -104,13 +104,13 @@ function display(value, time) {
 <div class="trans_title">
     <b>${title}</b>
     <span style="float:right;color:#0F74BD">
-        (${sourceLanguage})(${time} seconds)
+        (${sourceLanguage}→中文)(${time} 秒)
     </span>
 </div>
 ${dict_txt}
 <div style="padding-bottom:2px"></div>
 `;
-    div.style.display = 'block';
+    div.style.display = "block";
 }
 
 createDiv();

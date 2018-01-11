@@ -14,7 +14,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                     let word = content[0][1].toLowerCase();
                     cocaIdx = window.getIndex(word)
                 }
-                sendResponse({"data": data, "cocaIdx": cocaIdx});
+                sendResponse({
+                    "data": data,
+                    "cocaIdx": cocaIdx,
+                    "sourceLanguage": getLanguage(sourceLanguage)
+                });
             }
         };
         // sl:source language, tl:translation language, q:query, dj:detail json(value: 1)
