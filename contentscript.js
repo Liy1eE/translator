@@ -96,8 +96,10 @@ function display(value, time) {
             dict_txt += `<div class="trans_content">${str}</div>`;
         }
     } else {
-        for (let i = 0; i < content.length; i++)
-            dict_txt += `<div class="trans_content">${content[i][0]}</div>`;
+        let length = content.length;
+        let prefix = length > 1 ? "·" : "";
+        for (let i = 0; i < length; i++)
+            dict_txt += `<div class="trans_content">${prefix}${content[i][0]}</div>`;
     }
 
     div.innerHTML = `
