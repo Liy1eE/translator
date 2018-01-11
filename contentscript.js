@@ -79,7 +79,7 @@ function display(value, time) {
     if (cocaIdx)
         title = `${selectTxt}[${cocaIdx}]`;
     else
-        title = `${selectTxt.substr(0, 8)}${selectTxt.length > 8 ? '...' : ''}`;
+        title = `${selectTxt.substr(0, 15)}${selectTxt.length > 15 ? '...' : ''}`;
 
     let content = data[0];
     let dictionary = data[1];

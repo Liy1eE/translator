@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         };
         // sl:source language, tl:translation language, q:query, dj:detail json(value: 1)
         // dt:detail translation(value: t-translation, bd-dictionary)
-        xhr.send("client=gtx&sl=auto&tl=zh-CN&dt=t&dt=bd&q=" + message.value);
+        xhr.send("client=gtx&sl=auto&tl=zh-CN&dt=t&dt=bd&q=" + encodeURIComponent(message.value));
         return true;
     }
 });
