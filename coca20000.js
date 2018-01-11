@@ -1,4 +1,4 @@
-var datas;
+let datas;
 
 function getIndex(key) {
     return datas[key];

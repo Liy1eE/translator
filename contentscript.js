@@ -2,8 +2,46 @@ let div = null;
 let selectTxt = null;
 let lastSelectTxt = null;
 
+let showId = null;
+let hideId = null;
+
+function clear() {
+    if (showId) {
+        clearInterval(showId);
+        showId = null;
+    }
+    if (hideId) {
+        clearInterval(hideId);
+        hideId = null;
+    }
+}
+
+function show() {
+    clear();
+    div.style.display = "block";
+    showId = setInterval(function () {
+        if (div.style.opacity <= 1) {
+            div.style.opacity = div.style.opacity * 1 + 0.06;
+        } else {
+            clear();
+        }
+    }, 0)
+}
+
+function hide() {
+    clear();
+    hideId = setInterval(function () {
+        if (div.style.opacity > 0) {
+            div.style.opacity -= 0.03;
+        } else {
+            clear();
+            div.style.display = "none";
+        }
+    }, 0)
+}
+
 document.addEventListener("copy", function () {
-    div.style.display = "none";
+    hide();
 }, true);
 
 document.onmousedown = function (event) {
@@ -11,7 +49,7 @@ document.onmousedown = function (event) {
     let result = div.compareDocumentPosition(ele);
 
     if (result !== 20)
-        div.style.display = "none";
+        hide();
 };
 
 document.onmouseup = function () {
@@ -68,6 +106,7 @@ function query(value) {
 function createDiv() {
     div = document.createElement("div");
     div.setAttribute("id", "trans_main");
+    div.style.opacity = 0;
     document.body.appendChild(div);
 }
 
@@ -112,7 +151,8 @@ function display(value, time) {
 ${dict_txt}
 <div style="padding-bottom:2px"></div>
 `;
-    div.style.display = "block";
+
+    show()
 }
 
 createDiv();

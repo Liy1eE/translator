@@ -1,4 +1,4 @@
-var iso639_1;
+let iso639_1;
 
 function getLanguage(code){
     return iso639_1[code];
