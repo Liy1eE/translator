@@ -17,5 +17,5 @@
 ![translator](/imgs/demo.png)
 
 ## 安装
-- [直接下载](https://github.com/Liy1eE/translator/releases)
 - [chrome 插件商店](https://chrome.google.com/webstore/detail/%E5%85%89%E9%80%9F%E7%BF%BB%E8%AF%91/ebhiibkokgipjmidlacohkgfgbecabib)
+- [直接下载](https://github.com/Liy1eE/translator/releases/download/v3.6.1/translator_release.rar)
