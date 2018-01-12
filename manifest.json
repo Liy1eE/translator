@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Google 划词翻译",
-  "description": "轻量，快速",
-  "version": "3.6.0",
+  "description": "轻量，极速，准确",
+  "version": "3.6.1",
   "icons": {
     "512": "icons/icon.png"
   },
