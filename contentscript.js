@@ -20,20 +20,19 @@ function show() {
     clear();
     div.style.display = "block";
     showId = setInterval(function () {
-        if (div.style.opacity <= 1) {
+        if (div.style.opacity <= 1)
             div.style.opacity = div.style.opacity * 1 + 0.06;
-        } else {
+        else
             clear();
-        }
     }, 0)
 }
 
 function hide() {
     clear();
     hideId = setInterval(function () {
-        if (div.style.opacity > 0) {
-            div.style.opacity -= 0.03;
-        } else {
+        if (div.style.opacity > 0)
+            div.style.opacity -= 0.04;
+        else {
             clear();
             div.style.display = "none";
         }
@@ -115,14 +114,17 @@ function display(value, time) {
     let cocaIdx = value.cocaIdx;
     let sourceLanguage = value.sourceLanguage;
 
+    let content = data[0];
+    let source = content[0][1];
+    let dictionary = data[1];
+
     let title = null;
     if (cocaIdx)
-        title = `${selectTxt}[${cocaIdx}]`;
+        title = `${source}[${cocaIdx}]`;
     else
-        title = `${selectTxt.substr(0, 15)}${selectTxt.length > 15 ? "..." : ""}`;
+        title = `${source.substr(0, 15)}${source.length > 15 ? "..." : ""}`;
 
-    let content = data[0];
-    let dictionary = data[1];
+
     let dict_txt = "";
     if (dictionary) {
         for (let i = 0; i < dictionary.length; i++) {
