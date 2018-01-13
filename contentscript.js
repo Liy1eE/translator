@@ -2,14 +2,9 @@ let div = null;
 let selectTxt = null;
 let lastSelectTxt = null;
 
-let showId = null;
 let hideId = null;
 
 function clear() {
-    if (showId) {
-        clearInterval(showId);
-        showId = null;
-    }
     if (hideId) {
         clearInterval(hideId);
         hideId = null;
@@ -18,15 +13,8 @@ function clear() {
 
 function show() {
     clear();
+    div.style.opacity = 1;
     div.style.display = "block";
-    showId = setInterval(function () {
-        if (div.style.opacity < 1)
-            div.style.opacity = div.style.opacity * 1 + 0.25;
-        else {
-            div.style.opacity = 1;
-            clear();
-        }
-    }, 10);
 }
 
 function hide() {
