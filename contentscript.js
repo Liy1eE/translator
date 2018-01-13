@@ -20,11 +20,13 @@ function show() {
     clear();
     div.style.display = "block";
     showId = setInterval(function () {
-        if (div.style.opacity <= 1)
-            div.style.opacity = div.style.opacity * 1 + 0.34;
-        else
+        if (div.style.opacity < 1)
+            div.style.opacity = div.style.opacity * 1 + 0.25;
+        else {
+            div.style.opacity = 1;
             clear();
-    }, 10)
+        }
+    }, 10);
 }
 
 function hide() {
@@ -33,10 +35,11 @@ function hide() {
         if (div.style.opacity > 0)
             div.style.opacity -= 0.2;
         else {
+            div.style.opacity = 0;
             clear();
             div.style.display = "none";
         }
-    }, 10)
+    }, 10);
 }
 
 document.addEventListener("copy", function () {
