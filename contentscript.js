@@ -21,22 +21,22 @@ function show() {
     div.style.display = "block";
     showId = setInterval(function () {
         if (div.style.opacity <= 1)
-            div.style.opacity = div.style.opacity * 1 + 0.06;
+            div.style.opacity = div.style.opacity * 1 + 0.2;
         else
             clear();
-    }, 0)
+    }, 10)
 }
 
 function hide() {
     clear();
     hideId = setInterval(function () {
         if (div.style.opacity > 0)
-            div.style.opacity -= 0.04;
+            div.style.opacity -= 0.1;
         else {
             clear();
             div.style.display = "none";
         }
-    }, 0)
+    }, 10)
 }
 
 document.addEventListener("copy", function () {
@@ -47,7 +47,7 @@ document.onmousedown = function (event) {
     let ele = event.toElement || event.relatedTarget;
     let result = div.compareDocumentPosition(ele);
 
-    if (result !== 20)
+    if (result !== 20 && div.style.display !== "none")
         hide();
 };
 
@@ -154,7 +154,7 @@ ${dict_txt}
 <div style="padding-bottom:2px"></div>
 `;
 
-    show()
+    show();
 }
 
 createDiv();
