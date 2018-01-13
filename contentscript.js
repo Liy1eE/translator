@@ -21,7 +21,7 @@ function show() {
     div.style.display = "block";
     showId = setInterval(function () {
         if (div.style.opacity <= 1)
-            div.style.opacity = div.style.opacity * 1 + 0.2;
+            div.style.opacity = div.style.opacity * 1 + 0.34;
         else
             clear();
     }, 10)
@@ -31,7 +31,7 @@ function hide() {
     clear();
     hideId = setInterval(function () {
         if (div.style.opacity > 0)
-            div.style.opacity -= 0.1;
+            div.style.opacity -= 0.2;
         else {
             clear();
             div.style.display = "none";
